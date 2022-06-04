@@ -1,13 +1,13 @@
 #include <stdio.h>
 /*
- * File: 3-print_alphabets.c
+ * File: 4-print_alphabt.c
  * Author: AlbertG
  */
 
 /**
  * main - Prints the alphabet in lowercase,
  * followed by a new line with the putchar
- * function
+ * function except q and e
  *
  * Return: Always 0
  */
@@ -17,12 +17,8 @@ int main(void)
 
 	for (mychar = 'a'; mychar <= 'z'; ++mychar)
 	{
-		putchar(mychar);
-	}
-
-	for (mychar = 'A'; mychar <= 'Z'; ++mychar)
-	{
-		putchar(mychar);
+		if ((mychar != 'q') && (mychar != 'e'))
+			putchar(mychar);
 	}
 	putchar('\n');
 
