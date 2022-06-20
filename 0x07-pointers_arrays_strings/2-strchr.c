@@ -10,24 +10,11 @@
 char *_strchr(char *s, char c)
 {
 	int i = 0;
-	char *ptr;
 
 	while (s[i++] != '\0')
 	{
-		if (s[i] != c)
-		{
-			continue;
-		}
-		else if (s[i] == c)
-		{
-			ptr = &s[i];
-			break;
-		}
-		else
-		{
-			ptr = '\0';
-			break;
-		}
+		if (s[i] == c)
+			return (&s[i]);
 	}
-	return (ptr);
+	return ('\0');
 }
