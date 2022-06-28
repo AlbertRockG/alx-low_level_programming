@@ -15,6 +15,9 @@ int _strlen(char str[])
 {
 	int i = 0;
 
+	if (str == NULL)
+		return (0);
+
 	while (str[i] != '\0')
 	{
 		i++;
@@ -36,30 +39,44 @@ char *str_concat(char *s1, char *s2)
 	int i, j, length1, length2;
 	char *strconcat;
 
-	if (s1 == NULL)
-		length1 = 0;
-	else if (s2 == NULL)
-		length2 = 0;
-	else if (s1 != NULL)
-		length1 = _strlen(s1);
-	else
-		length2 = _strlen(s2);
 
-	strconcat = malloc((length1 + length2 + 1) * sizeof(char));
+	length1 = _strlen(s1);
+	length2 = _strlen(s2) + 1;
+
+	strconcat = malloc((length1 + length2) * sizeof(char));
 
 	if (strconcat == NULL)
 		return (NULL);
 
-	for (i = 0; s1[i]; i++)
+	if (length1 == 0)
 	{
-		strconcat[i] = s1[i];
+		for (i = 0; s2[i]; i++)
+		{
+			strconcat[i] = s2[i];
+		}
+		strconcat[length2] = '\0';
 	}
-
-	for (j = 0; s2[j]; j++)
+	else if (length2 == 0)
 	{
-		strconcat[i++] = s2[j];
-	}
-	strconcat[i++] = '\0';
+		for (i = 0; s1[i]; i++)
+		{
+			strconcat[i] = s1[i];
+		}
 
+		strconcat[i] = '\0';
+	}
+	else
+	{
+		for (i = 0; s1[i]; i++)
+		{
+			strconcat[i] = s1[i];
+		}
+
+		for (j = 0; s2[j]; j++)
+		{
+			strconcat[i++] = s2[j];
+		}
+		strconcat[i++] = '\0';
+	}
 	return (strconcat);
 }
