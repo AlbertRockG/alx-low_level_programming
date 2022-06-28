@@ -31,16 +31,16 @@ int _strlen(char str[])
 char *_strdup(char *str)
 {
 	int i;
-	int length = _strlen(str);
+	int length = _strlen(str) + 1;
 	char *strc;
 
+	if (str == NULL)
+		return (NULL);
+
+	if (malloc(length * sizeof(char)) == NULL)
+		return (NULL);
+
 	strc = (char *)malloc(length * sizeof(char));
-
-	if (length == 0)
-		return (NULL);
-	if (strc == NULL)
-		return (NULL);
-
 
 	for (i = 0; i <= length; i++)
 		strc[i] = str[i];
