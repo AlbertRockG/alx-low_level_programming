@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 int _strlen(char str[]);
@@ -31,19 +32,22 @@ int _strlen(char str[])
 char *_strdup(char *str)
 {
 	int i;
-	int length = _strlen(str) + 1;
-	char *strc;
+	char *copyofstr;
+	int length;
 
 	if (str == NULL)
 		return (NULL);
 
-	if (malloc(length * sizeof(char)) == NULL)
+	length = _strlen(str) + 1;
+	copyofstr = malloc(length * sizeof(char));
+
+	if ((str == NULL) || (copyofstr == NULL))
 		return (NULL);
 
-	strc = (char *)malloc(length * sizeof(char));
+	for (i = 0; str[i]; i++)
+		copyofstr[i] = str[i];
 
-	for (i = 0; i <= length; i++)
-		strc[i] = str[i];
+	copyofstr[i] = '\0';
 
-	return ((char *)strc);
+	return (copyofstr);
 }
