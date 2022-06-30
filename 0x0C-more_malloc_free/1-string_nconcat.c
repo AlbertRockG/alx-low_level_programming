@@ -51,7 +51,7 @@ unsigned int sizeof_dest_string(char *s1, char *s2, unsigned int n)
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-		unsigned int index = 0, s1_size = 0;
+	unsigned int index = 0, s1_size = 0;
 	unsigned int dest_size = 0, s2_size = 0;
 	char *dest_string;
 
