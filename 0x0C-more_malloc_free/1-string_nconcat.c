@@ -48,12 +48,10 @@ unsigned int sizeof_dest_string(char *s1, char *s2, unsigned int n)
  *
  * Return: A pointer to a character.
  */
-
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int index = 0, s1_size = 0;
-	unsigned int dest_size = 0, s2_size = 0;
-	char *dest_string;
+	char *concat;
+	unsigned int len = n, index;
 
 	if (s1 == NULL)
 		s1 = "";
@@ -61,30 +59,23 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (s2 == NULL)
 		s2 = "";
 
-	for (s1_size = 0; s1[s1_size]; s1_size++)
-		;
+	for (index = 0; s1[index]; index++)
+		len++;
 
-	for (s2_size = 0; s2[s2_size]; s2_size++)
-		;
+	concat = malloc(sizeof(char) * (len + 1));
 
-	if (n >= s2_size)
-		n = s2_size;
-
-	dest_size = s1_size + n + 1;
-	dest_size = sizeof_dest_string(s1, s2, n);
-	dest_string = malloc(sizeof(char) * dest_size);
-
-	if (dest_string == NULL)
+	if (concat == NULL)
 		return (NULL);
 
-	for (index = 0; index < (dest_size - 1); ++index)
-	{
-		if (index < s1_size)
-			dest_string[index] = s1[index];
-		else
-			dest_string[index] = s2[index - s1_size];
-	}
-	dest_string[dest_size] = '\0';
+	len = 0;
 
-	return (dest_string);
+	for (index = 0; s1[index]; index++)
+		concat[len++] = s1[index];
+
+	for (index = 0; s2[index] && index < n; index++)
+		concat[len++] = s2[index];
+
+	concat[len] = '\0';
+
+	return (concat);
 }
