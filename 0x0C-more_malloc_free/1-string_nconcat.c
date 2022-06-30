@@ -15,30 +15,27 @@ unsigned int sizeof_dest_string(char *s1, char *s2, unsigned int n);
 
 unsigned int sizeof_dest_string(char *s1, char *s2, unsigned int n)
 {
-	unsigned int index = 0, s1_size = 0;
-	unsigned int dest_size = 0, s2_size = 0;
+	unsigned int index, s1_size, s2_size;
+	unsigned int dest_size = 0;
 
-	if ((s1 == NULL) || (s2 == NULL))
-	{
+	if (s1 == NULL)
 		s1 = "";
-		s2 = "";
-	}
 
-	for (index = 0; s2[index]; index++)
+	if (s2 == NULL)
+		s2 = "";
+
+	index = s1_size = s2_size = 0;
+	while (s1[index++] != '\0')
+		s1_size++;
+
+	index = 0;
+	while (s2[index++] != '\0')
 		s2_size++;
 
-	if (n >= s2_size)
-	{
-		for (index = 0; s1[index] || s2[index]; index++)
-			dest_size++;
-	}
-	else
-	{
-		for (index = 0; s1[index]; index++)
-			s1_size++;
+	if (n >= s2_size++)
+		n = s2_size;
 
-		dest_size = s1_size + n;
-	}
+	dest_size = s1_size + n + 1;
 
 	return (dest_size);
 }
@@ -63,12 +60,21 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (deststring == NULL)
 		return (NULL);
 
-	for (index = 0; s1[index]; index++)
+	index = 0;
+	while (s1[index] != '\0')
+	{
 		deststring[final_size++] = s1[index];
+		index++;
+	}
 
-	for (index = 0; s2[index] && final_size <= dest_size; index++)
+	index = 0;
+	while (s2[index] != '\0' || final_size < dest_size)
+	{
 		deststring[final_size++] = s2[index];
+		index++;
+	}
 
-	deststring[final_size++] = '\0';
+	deststring[dest_size] = '\0';
+
 	return (deststring);
 }
