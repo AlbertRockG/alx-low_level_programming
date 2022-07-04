@@ -8,8 +8,6 @@
  *       SIZE as an abbreviation for the token 1024.
  */
 
-#ifndef SIZE
 #define SIZE 1024
-#endif // #define SIZE 1024
 
 #endif // #define 0_OBJECT_LIKE_MACRO_H
