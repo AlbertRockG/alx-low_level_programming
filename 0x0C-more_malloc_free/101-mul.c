@@ -14,16 +14,16 @@ int main(int argc, char *argv[])
 {
 	int base = 10;
 	char *endptr1, *endptr2;
-	long num1, num2;
+	long *num1, *num2;
 
 	if (argc != 3)
 	{
 		fprintf(stderr, "Error\n");
 		exit(98);
 	}
-	errno = 0;    /* To distinguish success/failure after call */
-	num1 = strtol(argv[1], &endptr1, base);
-	num2 = strtol(argv[2], &endptr2, base);
+	num1 = num2 = (long int*)malloc(sizeof(long int) * ULLONG_MAX)
+	*num1 = strtoul(argv[1], &endptr1, base);
+	*num2 = strtoul(argv[2], &endptr2, base);
 	if (errno != 0)
 	{
 		fprintf(stderr, "Error\n");
@@ -39,11 +39,15 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error\n");
 		exit(98);
 	}
-	if ((num1 < 0) || (num2 < 0))
+	if ((*num1 < 0) || (*num2 < 0))
 	{
 		fprintf(stderr, "Error\n");
 		exit(98);
 	}
-	printf("%ld\n", num1 * num2);
+	printf("%ld\n", (*num1) * (*num2));
+
+	free(num1);
+	free(num2);
+
 	return (0);
 }
