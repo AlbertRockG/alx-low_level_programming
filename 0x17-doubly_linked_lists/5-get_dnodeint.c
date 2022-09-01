@@ -4,6 +4,7 @@
  */
 
 #include "lists.h"
+#include <stdlib.h>
 
 /**
  * get_dnodeint_at_index - Locates a node in a dlistint_t list.
